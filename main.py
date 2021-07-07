@@ -6,8 +6,6 @@ from ffmpy import FFmpeg
 def main():
 
     destDirExists()
-    urlBase = 'https://www.youtube.com' #Baseurl
-    xpath = '//*[@id="thumbnail"]'
     #Setting options for chromedriver
     options = Options()
     #split arguments if needed
@@ -15,9 +13,6 @@ def main():
 
     #Init chromedriver
     driver = webdriver.Chrome('chromedriver.exe',chrome_options=options)
-    #Init counter variable for loop
-    counter = 0
-
     #Variable for while loop, taken from args
     #check first arg to be INT
     try:
@@ -29,9 +24,14 @@ def main():
         throwError()
 
     else:
+        urlBase = 'https://www.youtube.com' #Baseurl
         #setting full url
         url = urlBase + sys.argv[2]
         driver.get(url)
+        xpath = '//*[@id="thumbnail"]'
+        #Init counter variable for loop
+        counter = 0
+
         #Starting mainloop
         while(counterLimit > counter):
             video = pafy.new(url)
